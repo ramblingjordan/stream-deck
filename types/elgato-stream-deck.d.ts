@@ -1,0 +1,1 @@
+declare module 'elgato-stream-deck';
