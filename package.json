@@ -11,11 +11,11 @@
   "devDependencies": {
     "elgato-stream-deck": "^2.1.1",
     "gulp": "^4.0.0",
+    "gulp-help": "^1.6.1",
     "gulp-nodemon": "^2.4.2",
     "gulp-typescript": "^5.0.1",
     "gulp-util": "^3.0.8",
     "gulp-watch": "^5.0.1",
-    "typescript": "^3.4.1",
-    "watchify": "^3.11.1"
+    "typescript": "^3.4.1"
   }
 }

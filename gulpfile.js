@@ -1,18 +1,20 @@
-var gulp = require('gulp')
-var ts = require('gulp-typescript')
-var tsProject = ts.createProject('tsconfig.json')
+var gulp = require("gulp")
+var ts = require("gulp-typescript")
+var nodemon = require("gulp-nodemon")
+var tsProject = ts.createProject("tsconfig.json");
 
-function build() {
-  console.log('Building...')
-  let res = tsProject.src()
+gulp.task("compile", function() {
+  return tsProject.src()
     .pipe(tsProject())
-    .js.pipe(gulp.dest('dist'))
-  return res
-}
+    .js.pipe(gulp.dest("dist"));
+});
 
-gulp.task('watch', () => {
-  const watcher = gulp.watch(['src/*.ts'])
-  watcher.on('change', () => {
-    build()
-  })
-})
+gulp.task("default", ["compile"], function() {
+    var stream = nodemon({
+        script: "app/main.js",
+        watch: "src",
+        tasks: ["compile"],
+        env: { "DEBUG": "Application,Request,Response" }
+    });
+    return stream;
+});
