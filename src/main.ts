@@ -1,56 +1,19 @@
-import StreamDeck = require('elgato-stream-deck')
-import OBSWebSocket = require('obs-websocket-js')
-import Jimp = require('jimp')
+import * as StreamDeck from 'elgato-stream-deck'
+import * as OBSWebSocket from 'obs-websocket-js'
+import * as path from 'path'
 
 const sd = new StreamDeck()
 const obs = new OBSWebSocket()
 
-function setScene(sceneName: string) {
-  obs.send('SetCurrentScene', { 'scene-name': sceneName})
-  .catch(err => {})
-}
-
-function createIcon() {
-  let icon = new Jimp(72, 72, 'rgb(0, 0, 255)', (err, image) => {
-    Jimp.loadFont(Jimp.FONT_SANS_16_WHITE).then(font => {
-      image.print(font, 10, 10, 'TEST')
-      image.writeAsync('icons/TEST.png').catch(err=>{
-        // It always errors, ignoring it...
-      })
-    })
-  })
-}
+const ICON_SIZE = 72
 
 function eventHandlers() {
   console.log('Listening to event handlers...')
   sd.on('down', (keyIndex: number) => {
     console.log('key %d down', keyIndex)
     sd.fillColor(keyIndex, 255, 0, 0)
-    switch(keyIndex) {
-
-      // TOP ROW LEFT TO RIGHT
-      case 4: { setScene('Scene - WIDE MAIN') }
-      case 3: { setScene('Scene - CLOSE HUNT') }
-      case 2: { setScene('Scene - COIN BOX') }
-      case 1: { setScene('Card - BRB') }
-      case 0: { setScene('Card - PLAIN LOGO') }
-
-      // MIDDLE ROW LEFT TO RIGHT
-      case 9: {}
-      case 8: {}
-      case 7: {}
-      case 6: {}
-      case 5: {}
-
-      // BOTTOM ROW LEFT TO RIGHT
-      case 14: {}
-      case 13: {}
-      case 12: {}
-      case 11: {}
-      case 10: {}
-    }
   })
-
+  
   sd.on('up', (keyIndex: number) => {
     console.log('key %d up', keyIndex)
     sd.fillColor(keyIndex, 0, 255, 0)
@@ -58,26 +21,39 @@ function eventHandlers() {
   
   sd.on('error', (error: string) => {
     console.error(error)
-  }) 
-}
-
-function setButtonImage(keyID: Number, filePath: String) {
-  sd.fillImageFromFile(keyID, filePath)
-  .catch((err: String) => {
-    console.error(err)
   })
 }
 
-function setIcons() {
-  console.info('Setting button images')
-  setButtonImage(4, 'icons/WIDE.png')
-  setButtonImage(3, 'icons/HUNT.png')
-  setButtonImage(2, 'icons/COIN_BOX.png')
-  setButtonImage(1, 'icons/BRB.png')
-  setButtonImage(0, 'icons/LOGO.png')
+async function createIcon(buttonName: string, keyID: number, buttonText: string) {
+  let Jimp = require('jimp')
+
+  let file = path.join('icons', buttonName.concat('.png'))
+  console.log(file)
+  let image = await new Jimp(ICON_SIZE, ICON_SIZE, 'black', (err: string, image: any) => {
+    if (err) throw err
+  })
+
+  await Jimp.loadFont(Jimp.FONT_SANS_16_WHITE)
+    .then((font: any) => {
+      image.print(
+        font, 
+        // size start
+        0, 0,
+        {
+          text: buttonText,
+          alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+          alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE 
+        },
+        // total size
+        ICON_SIZE, ICON_SIZE
+        )
+      return image
+    }).then((image: any) => {
+      return image.write(file) // save
+    })
 }
 
-function startup() {
+function main() {
   console.debug('Starting Up!')
 
   console.debug('Clearing all keys')
@@ -87,16 +63,23 @@ function startup() {
   sd.setBrightness(100)
 
   console.log('Setting all to green')
-  for(let i=0; i<=14; i++){
+  for (let i = 0; i <= 14; i++) {
     sd.fillColor(i, 0, 255, 0)
   }
 
-  createIcon()
-  setIcons()
+  console.info('Setting button images')
+  const buttons = require('../config/buttons.json')
+  for (let button of buttons) {
+    if (button.buttonName) {
+      createIcon(button.buttonName, button.keyID, button.title).catch((err: string) => {if (err) throw err})
+      let file = path.resolve(__dirname, '..', 'icons', button.buttonName + '.png')
+      sd.fillImageFromFile(button.keyID, file).catch((err: string)=>{ if (err) throw err })
+    }
+  }
 
   console.log('Connecting to OBS websocket')
-  obs.connect({ address: 'localhost:4444'})
+  obs.connect({ address: 'localhost:4444' })
+  eventHandlers()
 }
 
-startup()
-eventHandlers()
+main()

@@ -1,0 +1,77 @@
+[
+  {
+    "buttonName": "WIDE",
+    "keyID": 4,
+    "title": "WIDE"
+  },
+  {
+    "buttonName": "HUNT",
+    "keyID": 3,
+    "title": "HUNT MODE"
+  },
+  {
+    "buttonName": "BOX",
+    "keyID": 2,
+    "title": "COIN BOX"
+  },
+  {
+    "buttonName": "BRB",
+    "keyID": 1,
+    "title": "BRB"
+  },
+  {
+    "buttonName": "LOGO",
+    "keyID": 0,
+    "title": "LOGO"
+  },
+  {
+    "buttonName": "PRE-SHOW",
+    "keyID": 9,
+    "title": "PRE SHOW"
+  },
+  {
+    "buttonName": "GO-LIVE",
+    "keyID": 8,
+    "title": "GO LIVE"
+  },
+  {
+    "buttonName": "GAW",
+    "keyID": 7,
+    "title": "GAW"
+  },
+  {
+    "buttonName": "TEMP",
+    "keyID": 6,
+    "title": "???"
+  },
+  {
+    "buttonName": "END-SHOW",
+    "keyID": 5,
+    "title": "END SHOW"
+  },
+  {
+    "buttonName": "NIFC",
+    "keyID": 14,
+    "title": "NIFC"
+  },
+  {
+    "buttonName": "PROOF",
+    "keyID": 13,
+    "title": "PROOF"
+  },
+  {
+    "buttonName": "40",
+    "keyID": 12,
+    "title": "40%"
+  },
+  {
+    "buttonName": "90",
+    "keyID": 11,
+    "title": "90%"
+  },
+  {
+    "buttonName": "FOREIGN",
+    "keyID": 10,
+    "title": "FOREIGN"
+  }
+]

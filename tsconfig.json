@@ -3,10 +3,11 @@
       "src/main.ts"
   ],
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "lib": ["es2015", "dom"],
     "paths": { "*": ["types/*"] },
       "noImplicitAny": true,
-      "target": "es5"
+      "target": "es6"
   }
 }
