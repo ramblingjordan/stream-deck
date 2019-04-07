@@ -1,77 +1,77 @@
 [
   {
-    "buttonName": "WIDE",
+    "name": "WIDE",
     "keyID": 4,
     "title": "WIDE"
   },
   {
-    "buttonName": "HUNT",
+    "name": "HUNT",
     "keyID": 3,
     "title": "HUNT MODE"
   },
   {
-    "buttonName": "BOX",
+    "name": "BOX",
     "keyID": 2,
     "title": "COIN BOX"
   },
   {
-    "buttonName": "BRB",
+    "name": "BRB",
     "keyID": 1,
     "title": "BRB"
   },
   {
-    "buttonName": "LOGO",
+    "name": "LOGO",
     "keyID": 0,
     "title": "LOGO"
   },
   {
-    "buttonName": "PRE-SHOW",
+    "name": "PRE-SHOW",
     "keyID": 9,
     "title": "PRE SHOW"
   },
   {
-    "buttonName": "GO-LIVE",
+    "name": "GO-LIVE",
     "keyID": 8,
     "title": "GO LIVE"
   },
   {
-    "buttonName": "GAW",
+    "name": "GAW",
     "keyID": 7,
     "title": "GAW"
   },
   {
-    "buttonName": "TEMP",
+    "name": "RECORD",
     "keyID": 6,
-    "title": "???"
+    "title": "REC"
   },
   {
-    "buttonName": "END-SHOW",
+    "name": "END-SHOW",
     "keyID": 5,
     "title": "END SHOW"
   },
   {
-    "buttonName": "NIFC",
+    "name": "NIFC",
     "keyID": 14,
     "title": "NIFC"
   },
   {
-    "buttonName": "PROOF",
+    "name": "PROOF",
     "keyID": 13,
     "title": "PROOF"
   },
   {
-    "buttonName": "40",
+    "name": "40",
     "keyID": 12,
     "title": "40%"
   },
   {
-    "buttonName": "90",
+    "name": "90",
     "keyID": 11,
     "title": "90%"
   },
   {
-    "buttonName": "FOREIGN",
+    "name": "FOREIGN",
     "keyID": 10,
-    "title": "FOREIGN"
+    "title": "FORGN"
   }
 ]
