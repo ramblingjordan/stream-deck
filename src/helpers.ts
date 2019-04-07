@@ -28,4 +28,28 @@ function loadButtons(buttonFileIn: string) {
   return buttons
 }
 
-export { getButton, loadButtons }
+async function createIcon(button: Button, iconSize: number) {
+  let Jimp = require('jimp')
+  let image = new Jimp(iconSize, iconSize, 'black', (err: string) => {
+    if (err) throw err
+  })
+  let font = await Jimp.loadFont(Jimp.FONT_SANS_16_WHITE)
+
+  image.print(
+    font,
+    // size start
+    0, 0,
+    {
+      text: button.title,
+      alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+      alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
+    },
+    // total size
+    iconSize, iconSize
+  )
+  // Jimp seems to prepend some bytes I can't remove, so SNIP!
+  return (await image.getBufferAsync(Jimp.MIME_BMP)).slice(54)
+  
+}
+
+export { getButton, loadButtons, createIcon }
