@@ -4,8 +4,9 @@
   "description": "",
   "main": "./dist/main.js",
   "scripts": {
+    "lint": "tslint --fix --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --watch src --ext ts  --exec 'ts-node src/main.ts'"
+    "dev": "nodemon --watch src --ext ts --exec 'ts-node src/main.ts'"
   },
   "author": "",
   "license": "MIT",

@@ -8,7 +8,7 @@ class Button {
   toggles: boolean
   path: string
 
-  constructor(
+  constructor (
     name: string,
     deckIndex: number,
     title: string,
@@ -23,12 +23,12 @@ class Button {
     this.path = path.resolve(__dirname, '..', 'icons', this.name + '.png')
   }
 
-  push() {
+  push () {
     this.state = true
     console.log(this.name + ' down')
   }
 
-  release() {
+  release () {
     this.state = false
     console.log(this.name + ' up')
   }

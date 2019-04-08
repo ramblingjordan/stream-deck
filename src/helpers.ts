@@ -1,16 +1,16 @@
 import { Button } from './button'
 
-function getButton(id: number, buttons: Button[]) {
-  let returnButton: Button
+function getButton (id: number, buttons: Button[]) {
+  let returnButton = new Button('DEFAULT', 0, '', false, false)
   buttons.forEach(button => {
-    if (button.deckIndex == id) {
+    if (button.deckIndex === id) {
       returnButton = button
     }
   })
   return returnButton
 }
 
-function loadButtons(buttonFileIn: string) {
+function loadButtons (buttonFileIn: string) {
   const buttonFile = require(buttonFileIn)
   let buttons: Array<Button> = []
 
@@ -28,11 +28,9 @@ function loadButtons(buttonFileIn: string) {
   return buttons
 }
 
-async function createIcon(button: Button, iconSize: number) {
+async function createIcon (button: Button, iconSize: number) {
   let Jimp = require('jimp')
-  let image = new Jimp(iconSize, iconSize, 'black', (err: string) => {
-    if (err) throw err
-  })
+  let image = new Jimp(iconSize, iconSize, 'black', (err: string) => { if (err) throw err })
   let font = await Jimp.loadFont(Jimp.FONT_SANS_16_WHITE)
 
   image.print(
@@ -49,7 +47,6 @@ async function createIcon(button: Button, iconSize: number) {
   )
   // Jimp seems to prepend some bytes I can't remove, so SNIP!
   return (await image.getBufferAsync(Jimp.MIME_BMP)).slice(54)
-  
 }
 
 export { getButton, loadButtons, createIcon }

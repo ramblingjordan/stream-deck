@@ -8,51 +8,44 @@ const ICON_SIZE = 72
 class DeckHandler {
   sd = new StreamDeck()
 
-  setAllButtons(buttons: Button[]) {
+  async setAllButtons (buttons: Button[]) {
     for (let button of buttons) {
-      this.setButton(button)
+      await this.setButton(button).catch((err: string) => { console.error(err) })
     }
   }
 
-  async clearAll() {
-    await this.sd.clearAllKeys()
+  async clearAll () {
+    try { await this.sd.clearAllKeys() }
+    catch(err) { console.error(err) }
   }
 
-  setBrightness(brightness: number) {
+  setBrightness (brightness: number) {
     this.sd.setBrightness(brightness)
   }
 
-  async setButton(button: Button) {
+  async setButton (button: Button) {
     let buff = await createIcon(button, ICON_SIZE)
     this.sd.fillImage(button.deckIndex, buff)
   }
 
-  eventHandlers(buttons: Button[], debounceDelay: number = 200) {
+  eventHandlers (buttons: Button[], debounceDelay: number = 200) {
 
     this.sd.on('down',
       _.debounce(
-        (keyIndex: number) => {
+        async (keyIndex: number) => {
           let button = getButton(keyIndex, buttons)
           button.push()
-          this.setButton(button)
-        }, 
-        debounceDelay),
-        {
-          'leading': true,
-          'trailing': false
-        })
+          await this.setButton(button)
+        },
+        debounceDelay))
 
     this.sd.on('up',
       _.debounce(
-        (keyIndex: number) => {
+        async (keyIndex: number) => {
           let button = getButton(keyIndex, buttons)
           button.release()
-          this.setButton(button)
-        }, debounceDelay),
-        {
-          'leading': true,
-          'trailing': false
-        })
+          await this.setButton(button)
+        }, debounceDelay))
 
     this.sd.on('error', (error: string) => {
       console.error(error)
