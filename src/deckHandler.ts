@@ -8,27 +8,26 @@ const ICON_SIZE = 72
 class DeckHandler {
   sd = new StreamDeck()
 
-  async setAllButtons (buttons: Button[]) {
+  async setAllButtons(buttons: Button[]) {
     for (let button of buttons) {
-      await this.setButton(button).catch((err: string) => { console.error(err) })
+      await this.setButton(button)
     }
   }
 
-  async clearAll () {
-    try { await this.sd.clearAllKeys() }
-    catch(err) { console.error(err) }
+  async clearAll() {
+    await this.sd.clearAllKeys()
   }
 
-  setBrightness (brightness: number) {
+  setBrightness(brightness: number) {
     this.sd.setBrightness(brightness)
   }
 
-  async setButton (button: Button) {
+  async setButton(button: Button) {
     let buff = await createIcon(button, ICON_SIZE)
     this.sd.fillImage(button.deckIndex, buff)
   }
 
-  eventHandlers (buttons: Button[], debounceDelay: number = 200) {
+  eventHandlers(buttons: Button[], debounceDelay: number = 200) {
 
     this.sd.on('down',
       _.debounce(
