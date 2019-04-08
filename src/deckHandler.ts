@@ -44,7 +44,8 @@ class DeckHandler {
           let button = getButton(keyIndex, buttons)
           button.release()
           await this.setButton(button)
-        }, debounceDelay))
+        }, 
+        debounceDelay))
 
     this.sd.on('error', (error: string) => {
       console.error(error)

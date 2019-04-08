@@ -23,12 +23,12 @@ class Button {
     this.path = path.resolve(__dirname, '..', 'icons', this.name + '.png')
   }
 
-  push () {
+  push ():void {
     this.state = true
     console.log(this.name + ' down')
   }
 
-  release () {
+  release ():void {
     this.state = false
     console.log(this.name + ' up')
   }
