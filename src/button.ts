@@ -6,17 +6,12 @@ interface Icon {
   color: string,
 }
 
-interface Helper {
-
-}
-
-interface Command {
-
+enum System {
+  
 }
 
 interface Action {
-  helper: Helper,
-  command: Command
+  (system: System, command: string): boolean  
 }
 
 interface State {
@@ -25,24 +20,14 @@ interface State {
   onExit?: Action
 }
 
-let iconUp: Icon = {
-  text: "TEST",
-  bgcolor: "BLACK",
-  color: "WHITE"
+let blankIcon: Icon = {
+  text: '',
+  bgcolor: 'BLACK',
+  color: 'WHITE'
 }
 
-let iconDown: Icon = {
-  text: "test",
-  bgcolor: "WHITE",
-  color: "BLACK"
-}
-
-let stateUp: State = {
-  icon: iconUp
-}
-
-let stateDown: State = {
-  icon: iconDown
+let blankState: State = {
+  icon: blankIcon
 }
 
 class Button {
@@ -51,11 +36,14 @@ class Button {
   up: State
   down: State
 
-  constructor(deckIndex: number) {
+  constructor(
+    deckIndex: number,
+    state?: State) {
     this.deckIndex = deckIndex
-    this.state = stateUp
-    this.up = stateUp
-    this.down = stateDown
+    if (state) this.state = state
+    else this.state = blankState
+    this.up = blankState
+    this.down = blankState
   }
 
   push(): void {
