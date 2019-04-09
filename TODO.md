@@ -4,8 +4,9 @@
 
 ### Setup
 
-- Assign images to keys
-- Connect to OBS
+- [x] Assign images to keys
+- [ ] Add up and down 'states' for buttons
+- [x] Connect to OBS
 
 ### Runtime
 

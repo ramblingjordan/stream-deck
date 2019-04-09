@@ -2,7 +2,9 @@
   {
     "name": "WIDE",
     "keyID": 4,
-    "title": "WIDE"
+    "title": "WIDE",
+    "bgcolor": "BLACK",
+    "color": "WHITE"
   },
   {
     "name": "HUNT",

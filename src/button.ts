@@ -1,36 +1,71 @@
 import * as path from 'path'
 
+interface Icon {
+  text: string,
+  bgcolor?: string,
+  color: string,
+}
+
+interface Helper {
+
+}
+
+interface Command {
+
+}
+
+interface Action {
+  helper: Helper,
+  command: Command
+}
+
+interface State {
+  icon: Icon,
+  onEnter?: Action,
+  onExit?: Action
+}
+
+let iconUp: Icon = {
+  text: "TEST",
+  bgcolor: "BLACK",
+  color: "WHITE"
+}
+
+let iconDown: Icon = {
+  text: "test",
+  bgcolor: "WHITE",
+  color: "BLACK"
+}
+
+let stateUp: State = {
+  icon: iconUp
+}
+
+let stateDown: State = {
+  icon: iconDown
+}
+
 class Button {
-  name: string
   deckIndex: number
-  state: boolean
-  title: string
-  toggles: boolean
-  path: string
+  state: State
+  up: State
+  down: State
 
-  constructor (
-    name: string,
-    deckIndex: number,
-    title: string,
-    toggles: boolean,
-    initialState: boolean
-  ) {
-    this.name = name
+  constructor(deckIndex: number) {
     this.deckIndex = deckIndex
-    this.title = title
-    this.toggles = toggles
-    this.state = initialState
-    this.path = path.resolve(__dirname, '..', 'icons', this.name + '.png')
+    this.state = stateUp
+    this.up = stateUp
+    this.down = stateDown
   }
 
-  push ():void {
-    this.state = true
-    console.log(this.name + ' down')
+  push(): void {
+    console.log(this.deckIndex + ' down')
+    this.state = this.down
   }
 
-  release ():void {
-    this.state = false
-    console.log(this.name + ' up')
+  release(): void {
+    console.log(this.deckIndex + ' up')
+    this.state = this.up
   }
 }
 
