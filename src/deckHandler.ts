@@ -27,7 +27,7 @@ class DeckHandler {
     this.sd.fillImage(button.deckIndex, buff)
   }
 
-  eventHandlers(buttons: Button[], debounceDelay: number = 200) {
+  eventHandlers(buttons: Button[], debounceDelay: number = 300) {
 
     this.sd.on('down',
       _.debounce(

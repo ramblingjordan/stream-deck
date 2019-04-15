@@ -6,8 +6,8 @@ interface Icon {
   color: string,
 }
 
-enum System {
-  
+interface System {
+  name: string
 }
 
 interface Action {
@@ -40,9 +40,12 @@ class Button {
     deckIndex: number,
     state?: State) {
     this.deckIndex = deckIndex
-    if (state) this.state = state
-    else this.state = blankState
-    this.up = blankState
+    if (state) {
+      this.state = state
+    } else {
+      this.state = blankState
+    }
+    this.up = this.state
     this.down = blankState
   }
 
