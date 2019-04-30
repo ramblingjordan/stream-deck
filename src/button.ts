@@ -1,9 +1,8 @@
-import * as path from 'path'
-
 interface Icon {
-  text: string,
+  text?: string,
   bgcolor?: string,
-  color: string,
+  color?: string,
+  path?: string
 }
 
 interface System {
@@ -11,7 +10,7 @@ interface System {
 }
 
 interface Action {
-  (system: System, command: string): boolean  
+  (system: System, command: string): boolean
 }
 
 interface State {
@@ -30,13 +29,13 @@ let blankState: State = {
   icon: blankIcon
 }
 
-class Button {
+export class Button {
   deckIndex: number
   state: State
   up: State
   down: State
 
-  constructor(
+  constructor (
     deckIndex: number,
     state?: State) {
     this.deckIndex = deckIndex
@@ -49,15 +48,13 @@ class Button {
     this.down = blankState
   }
 
-  push(): void {
+  async push (): Promise<void> {
     console.log(this.deckIndex + ' down')
     this.state = this.down
   }
 
-  release(): void {
+  async release (): Promise<void> {
     console.log(this.deckIndex + ' up')
     this.state = this.up
   }
 }
-
-export { Button }

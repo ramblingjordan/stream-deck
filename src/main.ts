@@ -1,33 +1,33 @@
-import * as OBSWebSocket from 'obs-websocket-js'
 import { Button } from './button'
 import { DeckHandler } from './deckHandler'
 import * as Helpers from './helpers'
+import * as OBS from './obsHandler'
 
 const BUTTON_JSON = '../config/buttons.json'
 
 async function main () {
-  const sd = new DeckHandler()
-  const obs = new OBSWebSocket()
+  const deck = new DeckHandler()
+
 
   console.debug('Starting Up!')
 
   console.debug('Clearing all keys')
-  await sd.clearAll()
+  await deck.clearAll()
 
   console.log('Maximizing brightness')
-  sd.setBrightness(100)
+  deck.setBrightness(100)
 
   console.log('Loading button file')
-  let buttons: Button[] = Helpers.loadButtons(BUTTON_JSON)
+  let buttons: Button[] = await Helpers.loadButtons(BUTTON_JSON)
 
   console.log('Creating button images')
-  await sd.setAllButtons(buttons)
+  await deck.setAllButtons(buttons)
 
   console.log('Connecting to OBS websocket')
-  obs.connect({ address: 'localhost:4444' }).catch((err: string) => { console.error('OBS Connection Error') })
+  OBS.connect()
 
   console.log('Listening to event handlers...')
-  sd.eventHandlers(buttons)
+  deck.eventHandlers(buttons)
 }
 
 main().catch(err => { console.log(err) })

@@ -24,7 +24,7 @@ class DeckHandler {
 
   async setButton(button: Button) {
     let buff = await createIcon(button, ICON_SIZE)
-    this.sd.fillImage(button.deckIndex, buff)
+    await this.sd.fillImage(button.deckIndex, buff)
   }
 
   eventHandlers(buttons: Button[], debounceDelay: number = 300) {
@@ -42,7 +42,7 @@ class DeckHandler {
       _.debounce(
         async (keyIndex: number) => {
           let button = getButton(keyIndex, buttons)
-          button.release()
+          await button.release()
           await this.setButton(button)
         }, 
         debounceDelay))

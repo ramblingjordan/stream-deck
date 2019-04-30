@@ -2,9 +2,18 @@
   {
     "name": "WIDE",
     "keyID": 4,
-    "title": "WIDE",
-    "bgcolor": "BLACK",
-    "color": "WHITE"
+    "state": {
+      "icon": {
+        "text": "TEST",
+        "bgcolor": "BLACK",
+        "color": "WHITE"
+      },
+      "down": {
+        "text": "PUSHED",
+        "bgcolor": "WHITE",
+        "color": "BLACK"
+      }
+    }
   },
   {
     "name": "HUNT",

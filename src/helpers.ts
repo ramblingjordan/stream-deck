@@ -10,12 +10,12 @@ function getButton (id: number, buttons: Button[]) {
   return returnButton
 }
 
-function loadButtons (buttonFileIn: string) {
+async function loadButtons (buttonFileIn: string) {
   const buttonFile = require(buttonFileIn)
   let buttons: Array<Button> = []
 
   for (let button of buttonFile) {
-    buttons.push(new Button(button.keyID))
+    buttons.push(new Button(button.keyID, button.state))
   }
   return buttons
 }
@@ -25,7 +25,7 @@ async function createIcon (button: Button, iconSize: number) {
   let image = new Jimp(iconSize, iconSize, button.state.icon.bgcolor, (err: string) => { if (err) throw err })
   let font = await Jimp.loadFont(Jimp.FONT_SANS_16_WHITE)
 
-  image.print(
+  await image.print(
     font,
     // size start
     0, 0,
