@@ -8,7 +8,6 @@ const BUTTON_JSON = '../config/buttons.json'
 async function main () {
   const deck = new DeckHandler()
 
-
   console.debug('Starting Up!')
 
   console.debug('Clearing all keys')
